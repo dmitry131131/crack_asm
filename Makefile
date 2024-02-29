@@ -17,6 +17,9 @@ BuildPrefix = build/
 BuildFolder = build
 Include = -Iinclude 
 
+CFLAGS+=`pkg-config --cflags gtk+-3.0`
+LDFLAGS+=`pkg-config --libs gtk+-3.0`
+
 Sources = crack.cpp
 Main = main.cpp
 
@@ -34,11 +37,11 @@ prepare:
 
 $(BuildPrefix)%.o : $(SourcePrefix)%.cpp
 	@echo [CXX] -c $< -o $@
-	@$(CXX) $(CXXFLAGS) $(Include) -c $< -o $@
+	@$(CXX) $(CXXFLAGS) $(CFLAGS) $(LDFLAGS) $(Include) -c $< -o $@
 
 $(TARGET) : $(objects) $(MainObject)
 	@echo [CC] $^ -o $@
-	@$(CXX) $(CXXFLAGS) $(Include) $^ -o $@
+	@$(CXX) $(CXXFLAGS) $(CFLAGS) $(LDFLAGS) $(Include) $^ -o $@ 
 
 clean :
 	rm $(BuildFolder)/*.o
