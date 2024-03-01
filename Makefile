@@ -34,7 +34,6 @@ all : prepare folder $(TARGET)
 
 prepare: 
 	
-
 $(BuildPrefix)%.o : $(SourcePrefix)%.cpp
 	@echo [CXX] -c $< -o $@
 	@$(CXX) $(CXXFLAGS) $(CFLAGS) $(LDFLAGS) $(Include) -c $< -o $@
